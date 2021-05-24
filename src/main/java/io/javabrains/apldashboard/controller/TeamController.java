@@ -32,16 +32,10 @@ public class TeamController {
     public List<Match> getMatchesForTeam(@PathVariable String teamName, @RequestParam int year){
         LocalDate startDate = LocalDate.of(year,1,1);
         LocalDate endDate = LocalDate.of(year + 1,1,1);
-        System.out.println("startDate: " + startDate);
-        System.out.println("endDate: " + endDate);
-        return this.matchRepository.getByTeam1AndDateIsBetweenOrTeam2AndDateIsBetweenOrderByDateDesc(
-                teamName,
-                startDate,
-                endDate,
+        return this.matchRepository.getMatchesByTeamBetweenDates(
                 teamName,
                 startDate,
                 endDate
         );
     }
-
 }
