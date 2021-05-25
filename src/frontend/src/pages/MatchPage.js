@@ -1,13 +1,11 @@
-import {React, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {MatchDetailCard} from "../components/MatchDetailCard";
-import {MatchSmallCard} from "../components/MatchSmallCard";
-import {logDOM} from "@testing-library/react";
 import {useParams} from "react-router-dom";
 
-export const MatchPage = () => {
+export const MatchPage = (name, value) => {
 
     const [matches, setMatches] = useState([]);
-    const { teamName, year } = useParams();
+    const {teamName, year} = useParams();
 
     useEffect(
         () => {
@@ -16,15 +14,15 @@ export const MatchPage = () => {
                 const data = await response.json();
                 setMatches(data);
             };
-            fetchMatches().then(r => console.log(r));
-        },[]
+            fetchMatches().then(r => {});
+        }, []
     );
 
     return (
         <div className="MatchPage">
             <h1>Match Page</h1>
             {
-                matches.map(match => <MatchDetailCard teamName={teamName} match={match} />)
+                matches.map(match => <MatchDetailCard teamName={teamName} match={match} key={Math.floor(Math.random() * 1000000) + 1}/>)
             }
         </div>
     );
